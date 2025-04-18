@@ -17,14 +17,18 @@ void setup() {
 }
 
 void loop() {
-  const char text[] = "Hello NRF";
-  bool report = radio.write(&text, sizeof(text));
-  
-  if (report) {
-    Serial.println("Data sent successfully");
-  } else {
-    Serial.println("Failed to send");
+  if (Serial.available() > 0) {
+    String input = Serial.readStringUntil('\n'); // baca sampai newline
+    input.trim(); // hapus spasi jika ada
+    if (input.length() > 0 && input.length() < 32) { // panjang maksimal data NRF24
+      char text[input.length() + 1];
+      input.toCharArray(text, input.length() + 1); // ubah ke char[]
+      radio.write(&text, input.length() + 1); // +1 karena null-terminator
+      Serial.print("Terkirim: ");
+      Serial.println(text);
+    } else {
+      Serial.println("Input terlalu panjang atau kosong.");
+    }
+    delay(500);
   }
-
-  delay(500); // delay 0.5 detik, sesuaikan kebutuhan
 }

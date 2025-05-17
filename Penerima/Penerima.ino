@@ -4,13 +4,13 @@
 
 RF24 radio(9, 10);  // CE, CSN
 
-const byte address[6] = "00001";  // alamat komunikasi
+const byte address[6] = "00002";  // alamat komunikasi
 
 void setup() {
   Serial.begin(9600);
   radio.begin();
   radio.setPALevel(RF24_PA_MAX);
-  radio.setDataRate(RF24_2MBPS);  // speed tinggi
+  radio.setDataRate(RF24_1MBPS);  // speed tinggi
   radio.openReadingPipe(0, address);
   radio.startListening();  // mode terima
 }

@@ -25,3 +25,16 @@ Wiring Arduini UNO
 | `MOSI`       | `Pin 11`        | SPI Master Out                                                                              |
 | `MISO`       | `Pin 12`        | SPI Master In                                                                               |
 
+Wiring ESP32
+| L298N Pin  | ESP32 Pin       | Keterangan                                                                                                       |
+| ---------- | --------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `GND`      | `GND`           | Ground (harus satu ground dengan ESP32 dan sumber motor)                                                         |
+| `VCC`      | —               | **Jangan dihubungkan ke ESP32!** Sambungkan ke sumber daya motor (misal 6–12V)                                   |
+| `5V` (out) | —               | Output 5V dari modul L298N (bisa dipakai untuk ESP32 jika modul punya jumper `5V-EN`, tapi **tidak disarankan**) |
+| `IN1`      | `GPIO 26`       | Kontrol arah motor A (ubah sesuai kebutuhan)                                                                     |
+| `IN2`      | `GPIO 27`       | Kontrol arah motor A                                                                                             |
+| `IN3`      | `GPIO 14`       | Kontrol arah motor B                                                                                             |
+| `IN4`      | `GPIO 12`       | Kontrol arah motor B                                                                                             |
+| `ENA`      | `GPIO 25` (PWM) | Enable motor A (bisa pakai PWM untuk kecepatan)                                                                  |
+| `ENB`      | `GPIO 33` (PWM) | Enable motor B (bisa pakai PWM untuk kecepatan)                                                                  |
+

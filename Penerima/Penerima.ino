@@ -4,7 +4,7 @@
 
 RF24 radio(9, 10);  // CE, CSN
 
-const byte address[6] = "00002";  // alamat komunikasi
+const byte address[6] = "00001";  // alamat komunikasi
 
 void setup() {
   Serial.begin(9600);

@@ -6,7 +6,7 @@
 #define CSN_PIN 5
 
 RF24 radio(CE_PIN, CSN_PIN);
-const byte address[6] = "00002";
+const byte address[6] = "00001";
 
 void setup() {
   Serial.begin(9600);

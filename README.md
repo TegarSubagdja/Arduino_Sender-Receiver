@@ -19,8 +19,8 @@ Wiring Arduini UNO
 | ------------ | --------------- | ------------------------------------------------------------------------------------------- |
 | `GND`        | `GND`           | Ground                                                                                      |
 | `VCC`        | `3.3V`          | **Tegangan stabil** — disarankan pakai **regulator eksternal** dan **kapasitor 10µF–100µF** |
-| `CE`         | `Pin 9`         | Chip Enable (CE)                                                                            |
-| `CSN`        | `Pin 10`        | Chip Select Not (CSN)                                                                       |
+| `CE`         | `Pin 8`         | Chip Enable (CE)                                                                            |
+| `CSN`        | `Pin 9`        | Chip Select Not (CSN)                                                                       |
 | `SCK`        | `Pin 13`        | SPI Clock                                                                                   |
 | `MOSI`       | `Pin 11`        | SPI Master Out                                                                              |
 | `MISO`       | `Pin 12`        | SPI Master In                                                                               |

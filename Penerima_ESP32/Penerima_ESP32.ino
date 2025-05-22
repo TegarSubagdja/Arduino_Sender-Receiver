@@ -6,13 +6,13 @@
 #define CSN_PIN 5
 
 RF24 radio(CE_PIN, CSN_PIN);
-const byte address[6] = "00005";
+const byte address[6] = "00001";
 
 void setup() {
   Serial.begin(9600);
 
   // Inisialisasi SPI khusus untuk ESP32
-  // SPI.begin(18, 19, 23, CSN_PIN);
+  SPI.begin(18, 19, 23, CSN_PIN);
 
   if (!radio.begin()) {
     Serial.println("Gagal inisialisasi radio. Periksa wiring atau power.");

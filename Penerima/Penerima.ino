@@ -11,9 +11,6 @@ void setup() {
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, LOW);
 
-  ledcAttach(ENA, pwmFreq, pwmResolution);
-  ledcAttach(ENB, pwmFreq, pwmResolution);
-
   radio.begin();
   radio.setPALevel(RF24_PA_LOW);       // Latency lebih rendah di mode LOW
   radio.setDataRate(RF24_2MBPS);       // Kecepatan maksimum

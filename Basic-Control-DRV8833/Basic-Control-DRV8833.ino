@@ -4,7 +4,7 @@ const int IN2 = 27;  // Motor kanan mundur
 const int IN3 = 25;  // Motor kiri maju
 const int IN4 = 26;  // Motor kiri mundur
 
-const int freq = 512;
+const int freq = 1024;
 const int res = 8;
 
 void setup() {

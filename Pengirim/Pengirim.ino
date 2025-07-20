@@ -2,25 +2,47 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 
-RF24 radio(4, 5); // CE, CSN
+// NRF24 Setup
+RF24 radio(4, 5);  // CE, CSN
+const byte address[6] = "00001";
 
-const byte address[6] = "00001"; // alamat komunikasi
+// Buffer input serial
+String inputData = "";
 
 void setup() {
   Serial.begin(9600);
+
   radio.begin();
-  radio.setPALevel(RF24_PA_LOW);        // Gunakan daya rendah untuk waktu switching lebih cepat
-  radio.setDataRate(RF24_2MBPS);        // Kecepatan maksimum
-  radio.setRetries(0, 0);               // Tidak ada retry
-  radio.setChannel(76);                 // Pilih channel bebas gangguan
-  radio.disableCRC();                   // Hilangkan CRC
-  radio.setAutoAck(false);              // Matikan auto-ACK
+  radio.setPALevel(RF24_PA_LOW);
+  radio.setDataRate(RF24_2MBPS);
+  radio.setChannel(76);
+  radio.setAutoAck(false);
+  radio.disableCRC();
   radio.openWritingPipe(address);
-  radio.stopListening();                // Mode TX
+  radio.stopListening();  // Mode pemancar
+
+  Serial.println("ESP32 NRF24 Transmitter Siap");
 }
 
 void loop() {
-  const char* text = "hai";
-  radio.write(&text, strlen(text) + 1); // kirim pesan kecil
-  delay(300); // jeda antar pengiriman
+  if (Serial.available()) {
+    inputData = Serial.readStringUntil('\n');
+    inputData.trim();  // Hilangkan newline atau spasi
+
+    int separatorIndex = inputData.indexOf(',');
+    if (separatorIndex > 0 && separatorIndex < inputData.length() - 1) {
+      String kiriStr = inputData.substring(0, separatorIndex);
+      String kananStr = inputData.substring(separatorIndex + 1);
+
+      int kiri = kiriStr.toInt();
+      int kanan = kananStr.toInt();
+
+      // Clamp nilai agar tetap dalam 0-255
+      kiri = constrain(kiri, 0, 255);
+      kanan = constrain(kanan, 0, 255);
+
+      byte dataToSend[2] = { (byte)kiri, (byte)kanan };
+      bool success = radio.write(&dataToSend, sizeof(dataToSend));
+    }
+  }
 }
